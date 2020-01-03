@@ -1,30 +1,29 @@
 <?php
-function generateID($leght) {
+
+session_start();
+
+function generateID($length) {
     $ret = '';
-    for ($i = 0; $i < $leght; $i++){
+
+    for ($i = 0; $i < $length; $i++){
         $ret .= rand(0, 9);
     }
+
     return $ret;
 }
+$id = $_SESSION['id'] ?? generateID(16);
+$_SESSION['id'] = $id;
 
-if(!isset($_COOKIE['userID'])) {
-    $id = generateID(16);
-    setcookie('userID', $id, time() + 3600);
-    $h1 = $id;
-} else {
-    $h1 = $_COOKIE['userID'];
-}
-$count = ($_COOKIE['visits'] ?? 0) + 1;
-setcookie('visits', $count, time() + 3600);
+$count = ($_SESSION['visits'] ?? 0) + 1;
+$_SESSION['visits'] = $count;
 
-$h2 = $count;
 ?>
 <html>
     <head>
         <title>Test</title>
     </head>
     <body>
-        <h1><?php print $h1; ?></h1>
-        <h2><?php print $h2; ?></h2>
+        <h1><?php print $id; ?></h1>
+        <h2><?php print $count; ?></h2>
     </body>
 </html>
