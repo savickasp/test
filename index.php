@@ -8,13 +8,15 @@ function generateID($leght) {
 }
 
 if(!isset($_COOKIE['userID'])) {
-    setcookie('userID', generateID(16), time() + 3600);
+    $id = generateID(16);
+    setcookie('userID', $id, time() + 3600);
+    $h1 = $id;
+} else {
+    $h1 = $_COOKIE['userID'];
 }
-
 $count = ($_COOKIE['visits'] ?? 0) + 1;
 setcookie('visits', $count, time() + 3600);
 
-$h1 = $_COOKIE['userID'];
 $h2 = $count;
 ?>
 <html>
