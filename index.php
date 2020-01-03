@@ -1,10 +1,10 @@
 <?php
 
 session_start();
-
+$_COOKIE['PHPSESSID'] ?? header('location:index.php');
 $id = $_COOKIE['PHPSESSID'];
 
-$count = ($_SESSION['visits'] ?? 0) + 1;
+$count = ($_SESSION['visits'] ?? -1) + 1;
 $_SESSION['visits'] = $count;
 
 ?>
